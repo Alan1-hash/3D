@@ -22,16 +22,17 @@ html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#061522;col
 .nav button.active,.nav button:hover{background:linear-gradient(180deg,rgba(0,168,235,.25),rgba(0,105,177,.16))}
 .nav button.active:after{content:"";position:absolute;left:14px;right:14px;bottom:0;height:2px;background:#72f2ff}
 .top-info{display:flex;justify-content:flex-end;gap:14px;align-items:center;padding-right:14px;font-size:12px}
-.home-toggle{display:none;height:30px;min-width:78px;border:1px solid rgba(105,231,255,.54);border-radius:5px;background:linear-gradient(180deg,rgba(16,126,204,.72),rgba(3,70,132,.56));color:#eefcff;font-size:13px;font-weight:900;cursor:pointer;box-shadow:0 0 12px rgba(33,215,255,.16)}
+.home-toggle{display:inline-flex;align-items:center;justify-content:center;height:30px;min-width:78px;border:1px solid rgba(105,231,255,.54);border-radius:5px;background:linear-gradient(180deg,rgba(16,126,204,.72),rgba(3,70,132,.56));color:#eefcff;font-size:13px;font-weight:900;cursor:pointer;box-shadow:0 0 12px rgba(33,215,255,.16)}
 .home-toggle:hover{border-color:#7bf4ff;box-shadow:0 0 16px rgba(33,215,255,.28)}
-.app.home-active .home-toggle{display:inline-flex;align-items:center;justify-content:center}
-.app.home-active.home-panels-hidden .shell{border-color:transparent}
-.app.home-active.home-panels-hidden .topbar{background:transparent;border-bottom-color:transparent}
-.app.home-active.home-panels-hidden .nav{opacity:0;visibility:hidden;pointer-events:none}
-.app.home-active.home-panels-hidden .top-info span{display:none}
-.app.home-panels-hidden #home .home-grid > .panel,
-.app.home-panels-hidden #home .bottom-grid{opacity:0;visibility:hidden;pointer-events:none}
-.app.home-panels-hidden #home .center{pointer-events:auto}
+.app.page-panels-hidden .shell{border-color:transparent}
+.app.page-panels-hidden .topbar{background:transparent;border-bottom-color:transparent}
+.app.page-panels-hidden .nav{opacity:0;visibility:hidden;pointer-events:none}
+.app.page-panels-hidden .top-info span{display:none}
+.app.page-panels-hidden .page.active .panel,
+.app.page-panels-hidden #video.active .video-page-grid > *{opacity:0;visibility:hidden;pointer-events:none}
+.app.page-panels-hidden .page.active .ops-center::before,
+.app.page-panels-hidden .page.active .safety-center::before{opacity:0;visibility:hidden}
+.app.page-panels-hidden #home.active .center{pointer-events:auto}
 .clock{text-align:right;font-weight:700}
 .page{position:absolute;left:0;right:0;top:56px;bottom:0;display:none}
 .page.active{display:block}
@@ -809,6 +810,129 @@ html,body{
   grid-template-columns:1.2fr .85fr .85fr .85fr;
   gap:8px;
 }
+#equipment .ops-bottom .panel-title{
+  position:relative;
+  z-index:5;
+}
+#equipment .ops-bottom .panel-body{
+  position:relative;
+  z-index:1;
+}
+#equipment .equipment-table-shell{
+  display:grid;
+  grid-template-rows:30px minmax(0,1fr);
+  padding:0 8px 12px 16px;
+  overflow:hidden;
+}
+#equipment .equipment-table-head{
+  display:block;
+  height:30px;
+}
+#equipment .equipment-table-head div{
+  min-height:30px;
+}
+#equipment .equipment-scroll-table,
+#equipment .equipment-scroll-list{
+  overflow-y:auto;
+  padding-right:8px;
+  scrollbar-width:thin;
+  scrollbar-color:rgba(91,231,255,.65) rgba(0,58,104,.24);
+}
+#equipment .equipment-scroll-table{
+  display:block;
+  padding-top:0;
+  clip-path:inset(0 0 0 0);
+}
+#equipment .equipment-scroll-table div{
+  min-height:30px;
+}
+#equipment .equipment-scroll-table::-webkit-scrollbar,
+#equipment .equipment-scroll-list::-webkit-scrollbar{
+  width:6px;
+}
+#equipment .equipment-scroll-table::-webkit-scrollbar-thumb,
+#equipment .equipment-scroll-list::-webkit-scrollbar-thumb{
+  border-radius:999px;
+  background:rgba(91,231,255,.65);
+}
+#equipment .equipment-scroll-table::-webkit-scrollbar-track,
+#equipment .equipment-scroll-list::-webkit-scrollbar-track{
+  background:rgba(0,58,104,.24);
+}
+
+.scroll-table-shell{
+  display:grid;
+  grid-template-rows:30px minmax(0,1fr);
+  padding:0 8px 12px 16px;
+  overflow:hidden;
+}
+.scroll-table-head{
+  display:block;
+  height:30px;
+}
+.scroll-table-head div{
+  min-height:30px;
+}
+.scroll-table-body{
+  display:block;
+  height:auto;
+  min-height:0;
+  overflow-y:auto;
+  padding-right:8px;
+  scrollbar-width:thin;
+  scrollbar-color:rgba(91,231,255,.65) rgba(0,58,104,.24);
+}
+.scroll-table-body div{
+  min-height:30px;
+}
+.scroll-list-body{
+  min-height:0;
+  overflow-y:auto;
+  align-content:start!important;
+  padding-right:8px;
+  scrollbar-width:thin;
+  scrollbar-color:rgba(91,231,255,.65) rgba(0,58,104,.24);
+}
+.record-scroll-shell{
+  display:grid;
+  grid-template-rows:28px minmax(0,1fr);
+  overflow:hidden;
+}
+.record-table-head{
+  display:block;
+  height:28px;
+}
+.record-table-head div{
+  min-height:28px;
+}
+.record-scroll-body{
+  display:block;
+  height:auto;
+  min-height:0;
+  overflow-y:auto;
+  padding-right:8px;
+  scrollbar-width:thin;
+  scrollbar-color:rgba(91,231,255,.65) rgba(0,58,104,.24);
+}
+.record-scroll-body div{
+  min-height:28px;
+}
+.scroll-table-body::-webkit-scrollbar,
+.scroll-list-body::-webkit-scrollbar,
+.record-scroll-body::-webkit-scrollbar{
+  width:6px;
+}
+.scroll-table-body::-webkit-scrollbar-thumb,
+.scroll-list-body::-webkit-scrollbar-thumb,
+.record-scroll-body::-webkit-scrollbar-thumb{
+  border-radius:999px;
+  background:rgba(91,231,255,.65);
+}
+.scroll-table-body::-webkit-scrollbar-track,
+.scroll-list-body::-webkit-scrollbar-track,
+.record-scroll-body::-webkit-scrollbar-track{
+  background:rgba(0,58,104,.24);
+}
 
 .nav button[data-page="green"],
 .nav button[data-page="location"]{
@@ -1242,8 +1366,8 @@ html,body{
         </div>
         <div class="ops-bottom">
           <section class="panel"><div class="panel-title">设备运行趋势</div><div class="panel-body ops-mini-chart"><div class="ops-mini-bar" style="height:72%"><span>89</span><em>周一</em></div><div class="ops-mini-bar" style="height:81%"><span>96</span><em>周二</em></div><div class="ops-mini-bar" style="height:76%"><span>91</span><em>周三</em></div><div class="ops-mini-bar" style="height:88%"><span>104</span><em>周四</em></div><div class="ops-mini-bar" style="height:95%"><span>112</span><em>今日</em></div></div></section>
-          <section class="panel"><div class="panel-title">重点设备清单</div><div class="panel-body ops-table"><div><b>设备</b><b>状态</b><b>责任人</b><b>时间</b></div><div><span>塔吊 01</span><span>正常</span><span>张工</span><span>08:20</span></div><div><span>升降机 02</span><span>告警</span><span>李工</span><span>08:31</span></div><div><span>闸机 05</span><span>正常</span><span>王工</span><span>08:35</span></div><div><span>配电箱 A3</span><span>巡检</span><span>赵工</span><span>08:42</span></div></div></section>
-          <section class="panel"><div class="panel-title">设备区域统计</div><div class="panel-body ops-list"><div class="ops-row"><span>阀厅区域</span><b>36 台</b></div><div class="ops-row"><span>交流场区域</span><b>31 台</b></div><div class="ops-row"><span>直流场区域</span><b>28 台</b></div><div class="ops-row"><span>生活办公区</span><b>29 台</b></div></div></section>
+          <section class="panel"><div class="panel-title">重点设备清单</div><div class="panel-body equipment-table-shell"><div class="ops-table equipment-table-head"><div><b>设备</b><b>状态</b><b>责任人</b><b>时间</b></div></div><div class="ops-table equipment-scroll-table"><div><span>塔吊 01</span><span>正常</span><span>张工</span><span>08:20</span></div><div><span>升降机 02</span><span>告警</span><span>李工</span><span>08:31</span></div><div><span>闸机 05</span><span>正常</span><span>王工</span><span>08:35</span></div><div><span>配电箱 A3</span><span>巡检</span><span>赵工</span><span>08:42</span></div><div><span>塔吊 03</span><span>复核</span><span>刘工</span><span>08:48</span></div><div><span>升降机 04</span><span>正常</span><span>周工</span><span>08:55</span></div><div><span>喷淋泵 02</span><span>保养</span><span>孙工</span><span>09:02</span></div><div><span>摄像头 18</span><span>离线</span><span>吴工</span><span>09:10</span></div><div><span>配电箱 B1</span><span>正常</span><span>陈工</span><span>09:18</span></div><div><span>门禁 06</span><span>正常</span><span>赵工</span><span>09:26</span></div></div></div></section>
+          <section class="panel"><div class="panel-title">设备区域统计</div><div class="panel-body ops-list equipment-scroll-list"><div class="ops-row"><span>阀厅区域</span><b>36 台</b></div><div class="ops-row"><span>交流场区域</span><b>31 台</b></div><div class="ops-row"><span>直流场区域</span><b>28 台</b></div><div class="ops-row"><span>生活办公区</span><b>29 台</b></div><div class="ops-row"><span>材料仓储区</span><b>18 台</b></div><div class="ops-row"><span>主控楼区域</span><b>24 台</b></div><div class="ops-row"><span>道路出入口</span><b>16 台</b></div><div class="ops-row"><span>办公临建区</span><b>14 台</b></div><div class="ops-row"><span>加工棚区域</span><b>21 台</b></div><div class="ops-row"><span>消防泵房区</span><b>9 台</b></div></div></section>
         </div>
       </div></div>
     </main>
@@ -1252,7 +1376,7 @@ html,body{
         <div class="ops-left"><section class="panel"><div class="panel-title">物料库存总览</div><div class="panel-body ops-stat-grid"><div class="ops-stat"><span>物料总量</span><b>168类</b><small>重点物资 42 类</small></div><div class="ops-stat"><span>今日入库</span><b>36</b><small>批次</small></div><div class="ops-stat"><span>今日出库</span><b>29</b><small>批次</small></div><div class="ops-stat"><span>库存预警</span><b class="warn">23</b><small>需关注</small></div></div></section><section class="panel"><div class="panel-title">主要材料消耗</div><div class="panel-body ops-list"><div class="ops-row"><span>钢筋</span><b>86.5 t</b></div><div class="ops-row"><span>混凝土</span><b>1260 m³</b></div><div class="ops-row"><span>电缆桥架</span><b>420 m</b></div><div class="ops-row"><span>接地扁钢</span><b>318 m</b></div><div class="ops-row"><span>周转材料</span><b>72 套</b></div></div></section></div>
         <div class="ops-center" data-title="物料堆场分布"></div>
         <div class="ops-right"><section class="panel"><div class="panel-title">库存健康度</div><div class="panel-body ops-ring-box"><div class="ops-ring" style="background:conic-gradient(#34eeaa 0 82%,#ffe16b 82% 94%,rgba(255,255,255,.12) 94%)"><b>82%</b></div><div class="ops-tags"><div class="ops-tag"><i></i><span>库存充足</span><b>112</b></div><div class="ops-tag"><i style="background:#ffe16b"></i><span>临界库存</span><b>33</b></div><div class="ops-tag"><i style="background:#ff747f"></i><span>低库存</span><b>23</b></div></div></div></section><section class="panel"><div class="panel-title">供应商到货</div><div class="panel-body ops-list"><div class="ops-row"><span>国网物资供应</span><b class="good">准时</b></div><div class="ops-row"><span>华东电缆公司</span><b class="warn">待到</b></div><div class="ops-row"><span>中建商砼站</span><b>3车</b></div><div class="ops-row"><span>金属构件厂</span><b>已验收</b></div></div></section></div>
-        <div class="ops-bottom"><section class="panel"><div class="panel-title">出入库趋势</div><div class="panel-body ops-mini-chart"><div class="ops-mini-bar" style="height:58%"><span>21</span><em>周一</em></div><div class="ops-mini-bar" style="height:76%"><span>32</span><em>周二</em></div><div class="ops-mini-bar" style="height:68%"><span>28</span><em>周三</em></div><div class="ops-mini-bar" style="height:85%"><span>36</span><em>周四</em></div><div class="ops-mini-bar" style="height:72%"><span>29</span><em>今日</em></div></div></section><section class="panel"><div class="panel-title">预警清单</div><div class="panel-body ops-table"><div><b>物料</b><b>类型</b><b>状态</b><b>责任人</b></div><div><span>电缆终端</span><span>机电</span><span>低库存</span><span>刘工</span></div><div><span>防火封堵</span><span>辅材</span><span>待补货</span><span>张工</span></div><div><span>钢模板</span><span>周转</span><span>占用高</span><span>李工</span></div><div><span>接地材料</span><span>安装</span><span>临界</span><span>王工</span></div></div></section><section class="panel"><div class="panel-title">物料分类占比</div><div class="panel-body ops-list"><div class="ops-row"><span>土建材料</span><b>38%</b></div><div class="ops-row"><span>机电物资</span><b>31%</b></div><div class="ops-row"><span>周转材料</span><b>18%</b></div><div class="ops-row"><span>安全防护</span><b>13%</b></div></div></section></div>
+        <div class="ops-bottom"><section class="panel"><div class="panel-title">出入库趋势</div><div class="panel-body ops-mini-chart"><div class="ops-mini-bar" style="height:58%"><span>21</span><em>周一</em></div><div class="ops-mini-bar" style="height:76%"><span>32</span><em>周二</em></div><div class="ops-mini-bar" style="height:68%"><span>28</span><em>周三</em></div><div class="ops-mini-bar" style="height:85%"><span>36</span><em>周四</em></div><div class="ops-mini-bar" style="height:72%"><span>29</span><em>今日</em></div></div></section><section class="panel"><div class="panel-title">预警清单</div><div class="panel-body scroll-table-shell"><div class="ops-table scroll-table-head"><div><b>物料</b><b>类型</b><b>状态</b><b>责任人</b></div></div><div class="ops-table scroll-table-body"><div><span>电缆终端</span><span>机电</span><span>低库存</span><span>刘工</span></div><div><span>防火封堵</span><span>辅材</span><span>待补货</span><span>张工</span></div><div><span>钢模板</span><span>周转</span><span>占用高</span><span>李工</span></div><div><span>接地材料</span><span>安装</span><span>临界</span><span>王工</span></div><div><span>电缆桥架</span><span>机电</span><span>待验收</span><span>陈工</span></div><div><span>防护网片</span><span>安全</span><span>补货中</span><span>周工</span></div><div><span>预埋件</span><span>土建</span><span>临界</span><span>赵工</span></div><div><span>消防器材</span><span>安全</span><span>待复核</span><span>孙工</span></div><div><span>周转脚手</span><span>周转</span><span>占用高</span><span>吴工</span></div><div><span>照明线缆</span><span>机电</span><span>低库存</span><span>李工</span></div></div></div></section><section class="panel"><div class="panel-title">物料分类占比</div><div class="panel-body ops-list scroll-list-body"><div class="ops-row"><span>土建材料</span><b>38%</b></div><div class="ops-row"><span>机电物资</span><b>31%</b></div><div class="ops-row"><span>周转材料</span><b>18%</b></div><div class="ops-row"><span>安全防护</span><b>13%</b></div><div class="ops-row"><span>装饰材料</span><b>9%</b></div><div class="ops-row"><span>消防材料</span><b>7%</b></div><div class="ops-row"><span>临建设施</span><b>6%</b></div><div class="ops-row"><span>办公物资</span><b>4%</b></div><div class="ops-row"><span>劳保用品</span><b>3%</b></div><div class="ops-row"><span>检测耗材</span><b>2%</b></div></div></section></div>
       </div></div>
     </main>
     <main class="page" id="video">
@@ -1323,7 +1447,7 @@ html,body{
         <div class="ops-left"><section class="panel"><div class="panel-title">总体进度</div><div class="panel-body ops-stat-grid"><div class="ops-stat"><span>总体完成率</span><b>68%</b><small>计划 72%</small></div><div class="ops-stat"><span>计划完成率</span><b>94%</b><small>偏差 -4%</small></div><div class="ops-stat"><span>关键节点</span><b>12</b><small>已完成 8</small></div><div class="ops-stat"><span>延期预警</span><b class="warn">3</b><small>需协调</small></div></div></section><section class="panel"><div class="panel-title">施工阶段进度</div><div class="panel-body ops-list"><div class="ops-row"><span>土建基础施工</span><b>92%</b></div><div class="ops-progress"><i style="width:92%"></i></div><div class="ops-row"><span>主体结构施工</span><b>76%</b></div><div class="ops-progress"><i style="width:76%"></i></div><div class="ops-row"><span>设备安装施工</span><b>58%</b></div><div class="ops-progress"><i style="width:58%"></i></div><div class="ops-row"><span>调试运维准备</span><b>32%</b></div><div class="ops-progress"><i style="width:32%"></i></div></div></section></div>
         <div class="ops-center" data-title="进度形象总览"></div>
         <div class="ops-right"><section class="panel"><div class="panel-title">节点达成率</div><div class="panel-body ops-ring-box"><div class="ops-ring" style="background:conic-gradient(#34eeaa 0 68%,#21d7ff 68% 94%,rgba(255,255,255,.12) 94%)"><b>68%</b></div><div class="ops-tags"><div class="ops-tag"><i></i><span>已完成节点</span><b>8</b></div><div class="ops-tag"><i style="background:#21d7ff"></i><span>进行中节点</span><b>4</b></div><div class="ops-tag"><i style="background:#ffe16b"></i><span>滞后节点</span><b>3</b></div></div></div></section><section class="panel"><div class="panel-title">延期预警</div><div class="panel-body ops-list"><div class="ops-row"><span>阀厅支架安装</span><b class="warn">滞后2天</b></div><div class="ops-row"><span>电缆沟施工</span><b class="warn">滞后1天</b></div><div class="ops-row"><span>设备基础复测</span><b class="bad">待协调</b></div><div class="ops-row"><span>二次屏柜进场</span><b>跟踪中</b></div></div></section></div>
-        <div class="ops-bottom"><section class="panel"><div class="panel-title">周计划完成趋势</div><div class="panel-body ops-mini-chart"><div class="ops-mini-bar" style="height:52%"><span>52%</span><em>第1周</em></div><div class="ops-mini-bar" style="height:61%"><span>61%</span><em>第2周</em></div><div class="ops-mini-bar" style="height:64%"><span>64%</span><em>第3周</em></div><div class="ops-mini-bar" style="height:68%"><span>68%</span><em>本周</em></div></div></section><section class="panel"><div class="panel-title">关键节点记录</div><div class="panel-body ops-table"><div><b>节点</b><b>计划</b><b>状态</b><b>责任人</b></div><div><span>主控楼封顶</span><span>07-20</span><span>进行中</span><span>张工</span></div><div><span>阀厅基础验收</span><span>07-18</span><span>完成</span><span>李工</span></div><div><span>GIS设备进场</span><span>07-25</span><span>待执行</span><span>王工</span></div><div><span>电缆支架安装</span><span>07-22</span><span>滞后</span><span>赵工</span></div></div></section><section class="panel"><div class="panel-title">作业面统计</div><div class="panel-body ops-list"><div class="ops-row"><span>当前作业面</span><b>18 个</b></div><div class="ops-row"><span>关键作业面</span><b>6 个</b></div><div class="ops-row"><span>交叉作业面</span><b class="warn">4 个</b></div><div class="ops-row"><span>已完成作业面</span><b>27 个</b></div></div></section></div>
+        <div class="ops-bottom"><section class="panel"><div class="panel-title">周计划完成趋势</div><div class="panel-body ops-mini-chart"><div class="ops-mini-bar" style="height:52%"><span>52%</span><em>第1周</em></div><div class="ops-mini-bar" style="height:61%"><span>61%</span><em>第2周</em></div><div class="ops-mini-bar" style="height:64%"><span>64%</span><em>第3周</em></div><div class="ops-mini-bar" style="height:68%"><span>68%</span><em>本周</em></div></div></section><section class="panel"><div class="panel-title">关键节点记录</div><div class="panel-body scroll-table-shell"><div class="ops-table scroll-table-head"><div><b>节点</b><b>计划</b><b>状态</b><b>责任人</b></div></div><div class="ops-table scroll-table-body"><div><span>主控楼封顶</span><span>07-20</span><span>进行中</span><span>张工</span></div><div><span>阀厅基础验收</span><span>07-18</span><span>完成</span><span>李工</span></div><div><span>GIS设备进场</span><span>07-25</span><span>待执行</span><span>王工</span></div><div><span>电缆支架安装</span><span>07-22</span><span>滞后</span><span>赵工</span></div><div><span>设备基础复测</span><span>07-23</span><span>进行中</span><span>刘工</span></div><div><span>二次屏柜进场</span><span>07-26</span><span>待执行</span><span>陈工</span></div><div><span>消防联动调试</span><span>07-28</span><span>待确认</span><span>周工</span></div><div><span>电缆沟验收</span><span>07-29</span><span>跟踪中</span><span>孙工</span></div><div><span>系统联合调试</span><span>08-02</span><span>待执行</span><span>吴工</span></div><div><span>资料归档复核</span><span>08-05</span><span>准备中</span><span>赵工</span></div></div></div></section><section class="panel"><div class="panel-title">作业面统计</div><div class="panel-body ops-list scroll-list-body"><div class="ops-row"><span>当前作业面</span><b>18 个</b></div><div class="ops-row"><span>关键作业面</span><b>6 个</b></div><div class="ops-row"><span>交叉作业面</span><b class="warn">4 个</b></div><div class="ops-row"><span>已完成作业面</span><b>27 个</b></div><div class="ops-row"><span>阀厅安装面</span><b>5 个</b></div><div class="ops-row"><span>交流场作业面</span><b>4 个</b></div><div class="ops-row"><span>直流场作业面</span><b>3 个</b></div><div class="ops-row"><span>材料加工面</span><b>2 个</b></div><div class="ops-row"><span>临建施工面</span><b>2 个</b></div><div class="ops-row"><span>待移交作业面</span><b>7 个</b></div></div></section></div>
       </div></div>
     </main>
     <main class="page" id="quality">
@@ -1331,7 +1455,7 @@ html,body{
         <div class="ops-left"><section class="panel"><div class="panel-title">质量检查总览</div><div class="panel-body ops-stat-grid"><div class="ops-stat"><span>检查总数</span><b>236</b><small>今日 18 项</small></div><div class="ops-stat"><span>合格率</span><b>92.6%</b><small>较昨日 +0.8%</small></div><div class="ops-stat"><span>待整改</span><b class="warn">28</b><small>重点 6 项</small></div><div class="ops-stat"><span>已完成</span><b class="good">198</b><small>闭环率 84%</small></div></div></section><section class="panel"><div class="panel-title">问题分类</div><div class="panel-body ops-list"><div class="ops-row"><span>实体质量偏差</span><b>12</b></div><div class="ops-row"><span>工艺质量问题</span><b>9</b></div><div class="ops-row"><span>资料缺项</span><b>5</b></div><div class="ops-row"><span>验收待复核</span><b>7</b></div><div class="ops-row"><span>试验检测异常</span><b class="warn">3</b></div></div></section></div>
         <div class="ops-center" data-title="质量管控总览"></div>
         <div class="ops-right"><section class="panel"><div class="panel-title">整改闭环率</div><div class="panel-body ops-ring-box"><div class="ops-ring" style="background:conic-gradient(#34eeaa 0 84%,#21d7ff 84% 92.6%,rgba(255,255,255,.12) 92.6%)"><b>84%</b></div><div class="ops-tags"><div class="ops-tag"><i></i><span>已闭环</span><b>198</b></div><div class="ops-tag"><i style="background:#ffe16b"></i><span>整改中</span><b>28</b></div><div class="ops-tag"><i style="background:#ff747f"></i><span>待复查</span><b>10</b></div></div></div></section><section class="panel"><div class="panel-title">质量隐患排行</div><div class="panel-body ops-list"><div class="ops-row"><span>混凝土外观</span><b>96%</b></div><div class="ops-row"><span>钢筋安装</span><b>94%</b></div><div class="ops-row"><span>电缆敷设</span><b>91%</b></div><div class="ops-row"><span>设备基础</span><b>88%</b></div><div class="ops-row"><span>防火封堵</span><b class="warn">82%</b></div></div></section></div>
-        <div class="ops-bottom"><section class="panel"><div class="panel-title">质量检查趋势</div><div class="panel-body ops-mini-chart"><div class="ops-mini-bar" style="height:78%"><span>42</span><em>周一</em></div><div class="ops-mini-bar" style="height:64%"><span>31</span><em>周二</em></div><div class="ops-mini-bar" style="height:82%"><span>48</span><em>周三</em></div><div class="ops-mini-bar" style="height:70%"><span>36</span><em>周四</em></div><div class="ops-mini-bar" style="height:58%"><span>18</span><em>今日</em></div></div></section><section class="panel"><div class="panel-title">验收记录</div><div class="panel-body ops-table"><div><b>验收项</b><b>区域</b><b>结果</b><b>责任人</b></div><div><span>阀厅基础</span><span>阀厅</span><span>合格</span><span>刘工</span></div><div><span>接地网</span><span>直流场</span><span>复核</span><span>张工</span></div><div><span>电缆沟</span><span>交流场</span><span>整改</span><span>李工</span></div><div><span>构支架</span><span>阀厅</span><span>合格</span><span>王工</span></div></div></section><section class="panel"><div class="panel-title">质量风险提示</div><div class="panel-body ops-list"><div class="ops-row"><span>试验报告待归档</span><b class="warn">6份</b></div><div class="ops-row"><span>测量记录待复核</span><b>4项</b></div><div class="ops-row"><span>样板验收待确认</span><b>2项</b></div><div class="ops-row"><span>重点工序旁站</span><b class="good">正常</b></div></div></section></div>
+        <div class="ops-bottom"><section class="panel"><div class="panel-title">质量检查趋势</div><div class="panel-body ops-mini-chart"><div class="ops-mini-bar" style="height:78%"><span>42</span><em>周一</em></div><div class="ops-mini-bar" style="height:64%"><span>31</span><em>周二</em></div><div class="ops-mini-bar" style="height:82%"><span>48</span><em>周三</em></div><div class="ops-mini-bar" style="height:70%"><span>36</span><em>周四</em></div><div class="ops-mini-bar" style="height:58%"><span>18</span><em>今日</em></div></div></section><section class="panel"><div class="panel-title">验收记录</div><div class="panel-body scroll-table-shell"><div class="ops-table scroll-table-head"><div><b>验收项</b><b>区域</b><b>结果</b><b>责任人</b></div></div><div class="ops-table scroll-table-body"><div><span>阀厅基础</span><span>阀厅</span><span>合格</span><span>刘工</span></div><div><span>接地网</span><span>直流场</span><span>复核</span><span>张工</span></div><div><span>电缆沟</span><span>交流场</span><span>整改</span><span>李工</span></div><div><span>构支架</span><span>阀厅</span><span>合格</span><span>王工</span></div><div><span>防火封堵</span><span>主控楼</span><span>复查</span><span>赵工</span></div><div><span>设备基础</span><span>阀厅</span><span>合格</span><span>陈工</span></div><div><span>屏柜安装</span><span>主控楼</span><span>待验</span><span>周工</span></div><div><span>电缆敷设</span><span>电缆层</span><span>整改</span><span>孙工</span></div><div><span>支架防腐</span><span>交流场</span><span>合格</span><span>吴工</span></div><div><span>资料复核</span><span>项目部</span><span>待补</span><span>李工</span></div></div></div></section><section class="panel"><div class="panel-title">质量风险提示</div><div class="panel-body ops-list scroll-list-body"><div class="ops-row"><span>试验报告待归档</span><b class="warn">6份</b></div><div class="ops-row"><span>测量记录待复核</span><b>4项</b></div><div class="ops-row"><span>样板验收待确认</span><b>2项</b></div><div class="ops-row"><span>重点工序旁站</span><b class="good">正常</b></div><div class="ops-row"><span>隐蔽验收资料</span><b class="warn">3项</b></div><div class="ops-row"><span>材料复检报告</span><b>5份</b></div><div class="ops-row"><span>整改照片上传</span><b class="warn">8张</b></div><div class="ops-row"><span>工序交接确认</span><b>2项</b></div><div class="ops-row"><span>设备开箱记录</span><b class="good">完成</b></div><div class="ops-row"><span>质量巡检复盘</span><b>今日</b></div></div></section></div>
       </div></div>
     </main>
     <main class="page" id="safety">
@@ -1344,7 +1468,7 @@ html,body{
           <div class="safety-center"></div>
           <div class="safety-bottom">
             <section class="panel"><div class="panel-title">现场施工防护与设施类隐患</div><div class="panel-body hazard-cards"><div class="hazard-card"><div class="hazard-ring"><b>0%</b></div><div><h4>临边洞口防护</h4><p>整改数 <strong>0</strong></p><p>整改中 <strong>0</strong></p><p>已整改 <strong>0</strong></p></div></div><div class="hazard-card"><div class="hazard-ring"><b>100%</b></div><div><h4>设备机械安全</h4><p>整改数 <strong>54</strong></p><p>整改中 <strong>0</strong></p><p>已整改 <strong>54</strong></p></div></div></div></section>
-            <section class="panel"><div class="panel-title">整改记录</div><div class="panel-body"><div class="record-table"><div><b>隐患名称</b><b>隐患等级</b><b>状态</b><b>责任人</b><b>整改日期</b></div><div><span>临边安全防护缺失</span><span>一般隐患</span><span>完成</span><span>刘伟</span><span>2026-07-12</span></div><div><span>塔吊安全围挡缺失</span><span>一般隐患</span><span>完成</span><span>王强</span><span>2026-07-13</span></div><div><span>脚手架立杆间距过大</span><span>一般隐患</span><span>完成</span><span>李磊</span><span>2026-07-14</span></div><div><span>消防通道堆放杂物</span><span>一般隐患</span><span>完成</span><span>张晨</span><span>2026-07-15</span></div><div><span>配电箱门未关闭</span><span>一般隐患</span><span>完成</span><span>赵工程</span><span>2026-07-15</span></div></div></div></section>
+            <section class="panel"><div class="panel-title">整改记录</div><div class="panel-body record-scroll-shell"><div class="record-table record-table-head"><div><b>隐患名称</b><b>隐患等级</b><b>状态</b><b>责任人</b><b>整改日期</b></div></div><div class="record-table record-scroll-body"><div><span>临边安全防护缺失</span><span>一般隐患</span><span>完成</span><span>刘伟</span><span>2026-07-12</span></div><div><span>塔吊安全围挡缺失</span><span>一般隐患</span><span>完成</span><span>王强</span><span>2026-07-13</span></div><div><span>脚手架立杆间距过大</span><span>一般隐患</span><span>完成</span><span>李磊</span><span>2026-07-14</span></div><div><span>消防通道堆放杂物</span><span>一般隐患</span><span>完成</span><span>张晨</span><span>2026-07-15</span></div><div><span>配电箱门未关闭</span><span>一般隐患</span><span>完成</span><span>赵工程</span><span>2026-07-15</span></div><div><span>动火审批未公示</span><span>一般隐患</span><span>整改中</span><span>陈伟</span><span>2026-07-16</span></div><div><span>安全通道标识缺失</span><span>一般隐患</span><span>完成</span><span>周磊</span><span>2026-07-16</span></div><div><span>临电线路防护不足</span><span>较大隐患</span><span>复查中</span><span>孙强</span><span>2026-07-17</span></div><div><span>吊装警戒区不完整</span><span>一般隐患</span><span>完成</span><span>吴晨</span><span>2026-07-17</span></div><div><span>材料堆放超出围挡</span><span>一般隐患</span><span>待整改</span><span>李工</span><span>2026-07-18</span></div></div></div></section>
           </div>
           <div class="safety-right"></div>
         </div>
@@ -1355,7 +1479,7 @@ html,body{
         <div class="ops-left"><section class="panel"><div class="panel-title">环境监测总览</div><div class="panel-body ops-stat-grid"><div class="ops-stat"><span>PM2.5</span><b>28</b><small>优</small></div><div class="ops-stat"><span>PM10</span><b>45</b><small>优</small></div><div class="ops-stat"><span>噪声</span><b>62</b><small>dB 良</small></div><div class="ops-stat"><span>环保预警</span><b class="warn">3</b><small>待处理</small></div></div></section><section class="panel"><div class="panel-title">绿色设备状态</div><div class="panel-body ops-list"><div class="ops-row"><span>雾炮联动</span><b class="good">运行</b></div><div class="ops-row"><span>围挡喷淋</span><b class="good">在线</b></div><div class="ops-row"><span>车辆冲洗</span><b>12 次</b></div><div class="ops-row"><span>扬尘监测</span><b>正常</b></div><div class="ops-row"><span>噪声监测</span><b class="warn">关注</b></div></div></section></div>
         <div class="ops-center" data-title="绿色施工态势"></div>
         <div class="ops-right"><section class="panel"><div class="panel-title">环保达标率</div><div class="panel-body ops-ring-box"><div class="ops-ring" style="background:conic-gradient(#34eeaa 0 96%,rgba(255,255,255,.12) 96%)"><b>96%</b></div><div class="ops-tags"><div class="ops-tag"><i></i><span>达标时长</span><b>22h</b></div><div class="ops-tag"><i style="background:#ffe16b"></i><span>临界时长</span><b>1.4h</b></div><div class="ops-tag"><i style="background:#ff747f"></i><span>超限时长</span><b>0.6h</b></div></div></div></section><section class="panel"><div class="panel-title">能耗水耗</div><div class="panel-body ops-list"><div class="ops-row"><span>今日用电</span><b>1260 kWh</b></div><div class="ops-row"><span>今日用水</span><b>86 m³</b></div><div class="ops-row"><span>节水率</span><b class="good">12.8%</b></div><div class="ops-row"><span>节电率</span><b class="good">9.6%</b></div></div></section></div>
-        <div class="ops-bottom"><section class="panel"><div class="panel-title">扬尘趋势</div><div class="panel-body ops-mini-chart"><div class="ops-mini-bar" style="height:45%"><span>31</span><em>8时</em></div><div class="ops-mini-bar" style="height:52%"><span>36</span><em>10时</em></div><div class="ops-mini-bar" style="height:62%"><span>43</span><em>12时</em></div><div class="ops-mini-bar" style="height:50%"><span>35</span><em>14时</em></div><div class="ops-mini-bar" style="height:40%"><span>28</span><em>当前</em></div></div></section><section class="panel"><div class="panel-title">环保预警记录</div><div class="panel-body ops-table"><div><b>类型</b><b>区域</b><b>状态</b><b>时间</b></div><div><span>噪声临界</span><span>施工区</span><span>已提醒</span><span>08:20</span></div><div><span>喷淋离线</span><span>东围挡</span><span>处理中</span><span>08:31</span></div><div><span>车辆冲洗</span><span>出入口</span><span>正常</span><span>08:42</span></div><div><span>扬尘升高</span><span>材料区</span><span>已联动</span><span>08:50</span></div></div></section><section class="panel"><div class="panel-title">绿色施工指标</div><div class="panel-body ops-list"><div class="ops-row"><span>裸土覆盖率</span><b>98%</b></div><div class="ops-row"><span>道路硬化率</span><b>100%</b></div><div class="ops-row"><span>垃圾分类率</span><b>93%</b></div><div class="ops-row"><span>喷淋联动率</span><b>96%</b></div></div></section></div>
+        <div class="ops-bottom"><section class="panel"><div class="panel-title">扬尘趋势</div><div class="panel-body ops-mini-chart"><div class="ops-mini-bar" style="height:45%"><span>31</span><em>8时</em></div><div class="ops-mini-bar" style="height:52%"><span>36</span><em>10时</em></div><div class="ops-mini-bar" style="height:62%"><span>43</span><em>12时</em></div><div class="ops-mini-bar" style="height:50%"><span>35</span><em>14时</em></div><div class="ops-mini-bar" style="height:40%"><span>28</span><em>当前</em></div></div></section><section class="panel"><div class="panel-title">环保预警记录</div><div class="panel-body scroll-table-shell"><div class="ops-table scroll-table-head"><div><b>类型</b><b>区域</b><b>状态</b><b>时间</b></div></div><div class="ops-table scroll-table-body"><div><span>噪声临界</span><span>施工区</span><span>已提醒</span><span>08:20</span></div><div><span>喷淋离线</span><span>东围挡</span><span>处理中</span><span>08:31</span></div><div><span>车辆冲洗</span><span>出入口</span><span>正常</span><span>08:42</span></div><div><span>扬尘升高</span><span>材料区</span><span>已联动</span><span>08:50</span></div><div><span>噪声超限</span><span>加工棚</span><span>已降噪</span><span>09:05</span></div><div><span>喷淋低压</span><span>西围挡</span><span>巡检中</span><span>09:18</span></div><div><span>裸土覆盖</span><span>堆场</span><span>待复查</span><span>09:26</span></div><div><span>雾炮离线</span><span>北侧</span><span>处理中</span><span>09:34</span></div><div><span>污水液位</span><span>沉淀池</span><span>已提醒</span><span>09:42</span></div><div><span>车辆冲洗</span><span>2号门</span><span>正常</span><span>09:50</span></div></div></div></section><section class="panel"><div class="panel-title">绿色施工指标</div><div class="panel-body ops-list scroll-list-body"><div class="ops-row"><span>裸土覆盖率</span><b>98%</b></div><div class="ops-row"><span>道路硬化率</span><b>100%</b></div><div class="ops-row"><span>垃圾分类率</span><b>93%</b></div><div class="ops-row"><span>喷淋联动率</span><b>96%</b></div><div class="ops-row"><span>车辆冲洗率</span><b>100%</b></div><div class="ops-row"><span>节水设备覆盖</span><b>88%</b></div><div class="ops-row"><span>节电设备覆盖</span><b>91%</b></div><div class="ops-row"><span>噪声达标率</span><b>95%</b></div><div class="ops-row"><span>扬尘达标率</span><b>96%</b></div><div class="ops-row"><span>污水回用率</span><b>72%</b></div></div></section></div>
       </div></div>
     </main>
     <main class="page" id="location">
@@ -1363,7 +1487,7 @@ html,body{
         <div class="ops-left"><section class="panel"><div class="panel-title">定位人员总览</div><div class="panel-body ops-stat-grid"><div class="ops-stat"><span>在场人数</span><b>532</b><small>今日进场 587</small></div><div class="ops-stat"><span>定位设备</span><b>486</b><small>在线率 96%</small></div><div class="ops-stat"><span>电子围栏</span><b>12</b><small>启用中</small></div><div class="ops-stat"><span>异常报警</span><b class="warn">5</b><small>待确认</small></div></div></section><section class="panel"><div class="panel-title">区域人员分布</div><div class="panel-body ops-list"><div class="ops-row"><span>阀厅施工区</span><b>128人</b></div><div class="ops-row"><span>交流场区域</span><b>96人</b></div><div class="ops-row"><span>直流场区域</span><b>88人</b></div><div class="ops-row"><span>材料仓储区</span><b>64人</b></div><div class="ops-row"><span>生活办公区</span><b>156人</b></div></div></section></div>
         <div class="ops-center" data-title="人员定位热力"></div>
         <div class="ops-right"><section class="panel"><div class="panel-title">定位覆盖率</div><div class="panel-body ops-ring-box"><div class="ops-ring" style="background:conic-gradient(#34eeaa 0 96%,#21d7ff 96% 100%)"><b>96%</b></div><div class="ops-tags"><div class="ops-tag"><i></i><span>在线标签</span><b>486</b></div><div class="ops-tag"><i style="background:#ffe16b"></i><span>低电量</span><b>18</b></div><div class="ops-tag"><i style="background:#ff747f"></i><span>离线标签</span><b>21</b></div></div></div></section><section class="panel"><div class="panel-title">异常事件</div><div class="panel-body ops-list"><div class="ops-row"><span>电子围栏越界</span><b class="bad">2</b></div><div class="ops-row"><span>危险区滞留</span><b class="warn">1</b></div><div class="ops-row"><span>长时间静止</span><b class="warn">2</b></div><div class="ops-row"><span>重点人员脱岗</span><b>0</b></div></div></section></div>
-        <div class="ops-bottom"><section class="panel"><div class="panel-title">进出场趋势</div><div class="panel-body ops-mini-chart"><div class="ops-mini-bar" style="height:62%"><span>98</span><em>8时</em></div><div class="ops-mini-bar" style="height:78%"><span>126</span><em>10时</em></div><div class="ops-mini-bar" style="height:94%"><span>156</span><em>12时</em></div><div class="ops-mini-bar" style="height:88%"><span>142</span><em>14时</em></div><div class="ops-mini-bar" style="height:70%"><span>103</span><em>当前</em></div></div></section><section class="panel"><div class="panel-title">轨迹事件记录</div><div class="panel-body ops-table"><div><b>人员</b><b>区域</b><b>事件</b><b>时间</b></div><div><span>王磊</span><span>阀厅</span><span>进入</span><span>08:12</span></div><div><span>张伟</span><span>交流场</span><span>巡检</span><span>08:28</span></div><div><span>李强</span><span>危险区</span><span>越界</span><span>08:36</span></div><div><span>赵敏</span><span>仓储区</span><span>离开</span><span>08:45</span></div></div></section><section class="panel"><div class="panel-title">工种分布</div><div class="panel-body ops-list"><div class="ops-row"><span>电气安装</span><b>196人</b></div><div class="ops-row"><span>土建施工</span><b>141人</b></div><div class="ops-row"><span>设备安装</span><b>76人</b></div><div class="ops-row"><span>调试运维</span><b>37人</b></div></div></section></div>
+        <div class="ops-bottom"><section class="panel"><div class="panel-title">进出场趋势</div><div class="panel-body ops-mini-chart"><div class="ops-mini-bar" style="height:62%"><span>98</span><em>8时</em></div><div class="ops-mini-bar" style="height:78%"><span>126</span><em>10时</em></div><div class="ops-mini-bar" style="height:94%"><span>156</span><em>12时</em></div><div class="ops-mini-bar" style="height:88%"><span>142</span><em>14时</em></div><div class="ops-mini-bar" style="height:70%"><span>103</span><em>当前</em></div></div></section><section class="panel"><div class="panel-title">轨迹事件记录</div><div class="panel-body scroll-table-shell"><div class="ops-table scroll-table-head"><div><b>人员</b><b>区域</b><b>事件</b><b>时间</b></div></div><div class="ops-table scroll-table-body"><div><span>王磊</span><span>阀厅</span><span>进入</span><span>08:12</span></div><div><span>张伟</span><span>交流场</span><span>巡检</span><span>08:28</span></div><div><span>李强</span><span>危险区</span><span>越界</span><span>08:36</span></div><div><span>赵敏</span><span>仓储区</span><span>离开</span><span>08:45</span></div><div><span>刘洋</span><span>材料区</span><span>进入</span><span>08:52</span></div><div><span>陈晨</span><span>主控楼</span><span>巡检</span><span>09:04</span></div><div><span>周强</span><span>直流场</span><span>停留</span><span>09:16</span></div><div><span>孙伟</span><span>办公区</span><span>离开</span><span>09:28</span></div><div><span>吴敏</span><span>交流场</span><span>进入</span><span>09:36</span></div><div><span>赵磊</span><span>危险区</span><span>提醒</span><span>09:44</span></div></div></div></section><section class="panel"><div class="panel-title">工种分布</div><div class="panel-body ops-list scroll-list-body"><div class="ops-row"><span>电气安装</span><b>196人</b></div><div class="ops-row"><span>土建施工</span><b>141人</b></div><div class="ops-row"><span>设备安装</span><b>76人</b></div><div class="ops-row"><span>调试运维</span><b>37人</b></div><div class="ops-row"><span>安全管理</span><b>28人</b></div><div class="ops-row"><span>质量管理</span><b>22人</b></div><div class="ops-row"><span>材料管理</span><b>18人</b></div><div class="ops-row"><span>机械司机</span><b>34人</b></div><div class="ops-row"><span>后勤保障</span><b>20人</b></div><div class="ops-row"><span>访客人员</span><b>8人</b></div></div></section></div>
       </div></div>
     </main>
   </div>
@@ -1377,11 +1501,21 @@ html,body{
   </div>
 </div>
 <script>
-const app=document.querySelector(".app"),pages=[...document.querySelectorAll(".page")],nav=[...document.querySelectorAll(".nav button")],homePanelToggle=document.getElementById("homePanelToggle");
-function syncHomeToggle(){app.classList.toggle("home-active",document.getElementById("home").classList.contains("active"))}
-nav.forEach(b=>b.addEventListener("click",()=>{pages.forEach(p=>p.classList.toggle("active",p.id===b.dataset.page));nav.forEach(n=>n.classList.toggle("active",n===b));syncHomeToggle()}));
-homePanelToggle.addEventListener("click",()=>{const hidden=app.classList.toggle("home-panels-hidden");homePanelToggle.textContent=hidden?"显示框":"隐藏框";homePanelToggle.setAttribute("aria-pressed",String(hidden))});
-syncHomeToggle();
+const app=document.querySelector(".app"),pages=[...document.querySelectorAll(".page")],nav=[...document.querySelectorAll(".nav button")],homePanelToggle=document.getElementById("homePanelToggle"),hiddenPages=new Set();
+function getActivePage(){return pages.find(p=>p.classList.contains("active"))||pages[0]}
+function syncPanelToggle(){
+  const hidden=hiddenPages.has(getActivePage().id);
+  app.classList.toggle("page-panels-hidden",hidden);
+  homePanelToggle.textContent=hidden?"显示框":"隐藏框";
+  homePanelToggle.setAttribute("aria-pressed",String(hidden));
+}
+nav.forEach(b=>b.addEventListener("click",()=>{pages.forEach(p=>p.classList.toggle("active",p.id===b.dataset.page));nav.forEach(n=>n.classList.toggle("active",n===b));syncPanelToggle()}));
+homePanelToggle.addEventListener("click",()=>{
+  const pageId=getActivePage().id;
+  hiddenPages.has(pageId)?hiddenPages.delete(pageId):hiddenPages.add(pageId);
+  syncPanelToggle();
+});
+syncPanelToggle();
 const videoDialog=document.getElementById("videoDialog"),videoDialogTitle=document.getElementById("videoDialogTitle"),videoDialogSubtitle=document.getElementById("videoDialogSubtitle"),videoDialogBody=document.getElementById("videoDialogBody"),videoDialogClose=document.getElementById("videoDialogClose");
 function openVideoDialog(title,body,subtitle=""){
   videoDialogTitle.textContent=title;
